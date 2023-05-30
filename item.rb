@@ -20,7 +20,7 @@ class Item
   end
 
   def can_be_archived?
-    Date.today > Date.iso8601(@publish_date).next_year(10)
+    Date.today > Date.iso8601(@published_date).next_year(10)
   end
 
   private :can_be_archived?
