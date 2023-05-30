@@ -1,6 +1,6 @@
 require_relative 'item'
 
-class label
+class Label
     attr_reader :id, :items
     attr_accessor :title, :color
 
@@ -12,6 +12,14 @@ class label
     end
 
     def add_item(item)
-        item.label = self
         @items << item
+        item.label = self
+    end
 end
+
+# ma = Label.new('ilyass', 'atlssi')
+# pa = Item.new('ilyass')
+
+# ma.add_item(pa)
+
+# puts ma.add_item(pa)
