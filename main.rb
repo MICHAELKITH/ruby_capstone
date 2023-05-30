@@ -1,7 +1,4 @@
-# frozen_string_literal: true
-
 require_relative 'app'
-
 class MainMainu
   @app = App.new
   def user_options(choice)
