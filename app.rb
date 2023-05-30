@@ -1,12 +1,16 @@
 # Documentation for the App class
 require_relative 'book'
+require_relative 'label'
 
 class App
   def initialize
-    @people = []
+    @books = []
+    @labels = []
     base = "#{Dir.pwd}/data"
     books_reader = File.read("#{base}/books.json")
-    JSON.parse(books_reader).each { |x| @books.push(Book.new(x['title'], x['author'])) } unless books_reader == ''
+    JSON.parse(books_reader).each { |x| @books.push(Book.new(x['publisher'], x['cover_state'], x['published_date'])) } unless books_reader == ''
+    labels_reader = File.read("#{base}/labels.json")
+    JSON.parse(labels_reader).each { |x| @books.push(Label.new(x['title'], x['color']) } unless labels_reader == ''
 
   end
 
@@ -17,8 +21,22 @@ class App
         return
       end
       @books.each do |book|
-        puts "Title: #{book.title}, Author: #{book.author}"
+        puts "publisher: #{book.publisher}, cover_state: #{book.cover_state}, published_date: #{book.published_date}"
       end
     end
-    publisher, cover_state, published_date
+
+    # create a list of labels
+    def list_books
+      if @labels.empty?
+        puts 'Oops! the library is empty, please add books'
+        return
+      end
+
+      @labels.each do |label|
+        puts "title: #{label.title}, color: #{label.color}"
+      end
+    end
+
+    # create a book
+    
 end
