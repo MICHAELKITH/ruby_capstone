@@ -38,5 +38,18 @@ class App
     end
 
     # create a book
-    
+    def create_book
+      print 'Publisher: '
+      publisher = gets.chomp
+  
+      print 'Cover State: '
+      cover_state = gets.chomp
+
+      print 'Published Date: '
+      published_date = gets.chomp
+  
+      @books << Book.new(publisher, cover_state, published_date)
+  
+      puts 'Book created successfully'
+    end
 end
