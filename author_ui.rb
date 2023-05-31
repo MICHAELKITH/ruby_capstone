@@ -13,7 +13,7 @@ class AuthorUserInterface
 
   def load_authors
     create_file_if_not_exist
-    return [] if File.zero?(FILE_LOCATION)
+    return [] if File.empty?(FILE_LOCATION)
 
     data = JSON.parse(File.read(FILE_LOCATION))
     data.map { |author_data| build_author_from_data(author_data) }
