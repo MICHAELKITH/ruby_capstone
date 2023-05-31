@@ -2,7 +2,7 @@ require_relative 'book'
 
 describe Book do
   before :each do
-    @book = [Book.new('ILyass', 'bad', '2010-09-09'),Book.new('ILyass', 'good', '2020-09-09')]
+    @book = [Book.new('ILyass', 'bad', '2010-09-09'), Book.new('ILyass', 'good', '2020-09-09')]
   end
 
   it 'should be an instance of Book class' do
