@@ -9,4 +9,15 @@ class Game < item
         @multiplayer = multiplayer
         @name = name
       end
+
+      def to_json(*_args)
+        {
+          'name' => @name,
+          'published_date' => @published_date,
+          'last_played_at' => @last_played_at,
+          'multiplayer' => @multiplayer
+        }
+      end
+    
+     
 end
