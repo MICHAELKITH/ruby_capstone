@@ -8,7 +8,8 @@ class App
     @labels = []
     # base = "#{Dir.pwd}/data"
     # books_reader = File.read("#{base}/books.json")
-    # JSON.parse(books_reader).each { |x| @books.push(Book.new(x['publisher'], x['cover_state'], x['published_date'])) } unless books_reader == ''
+    # JSON.parse(books_reader).each { |x| @books.push(Book.new(x['publisher'], x['cover_state'], x['published_date'])) }
+    #  unless books_reader == ''
     # labels_reader = File.read("#{base}/labels.json")
     # JSON.parse(labels_reader).each { |x| @books.push(Label.new(x['title'], x['color']))} unless labels_reader == ''
   end
@@ -25,7 +26,7 @@ class App
   end
 
   # create a list of labels
-  def list_books
+  def list_labels
     if @labels.empty?
       puts 'Oops! the library is empty, please add books'
       return
