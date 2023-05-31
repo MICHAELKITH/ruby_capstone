@@ -84,7 +84,8 @@ class App < Handler
       puts '=================================================================:'
       puts 'ID - Game Name - Last Played Date - Published Date - Multiplayer'
       @games.each do |game|
-        puts "#{game['id']} - #{game['game_name']} - #{game['last_played_at']} - #{game['publish_date']} - #{game['multiplayer']}"
+        puts "#{game['id']} - #{game['game_name']} - #{game['last_played_at']} -
+        #{game['publish_date']} - #{game['multiplayer']}"
       end
       puts '=================================================================:'
     end
