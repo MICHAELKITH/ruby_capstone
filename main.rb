@@ -163,5 +163,3 @@ main
 # end
 
 # ItemsApp.new.start
-
-

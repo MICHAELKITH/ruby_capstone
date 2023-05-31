@@ -4,12 +4,17 @@ require_relative 'label'
 
 class App
   attr_accessor :books
+
   def initialize
     @books = []
     @labels = [Label.new('Love at the end of the day.', 'Blue'), Label.new('The love of my lives.', 'Grey')]
     base = "#{Dir.pwd}/data"
     books_reader = File.read("#{base}/books.json")
-    JSON.parse(books_reader).each { |x| @books.push(Book.new(x['publisher'], x['cover_state'], x['published_date'])) } unless books_reader == ''
+    return if books_reader == ''
+
+    JSON.parse(books_reader).each do |x|
+      @books.push(Book.new(x['publisher'], x['cover_state'], x['published_date']))
+    end
   end
 
   # create a list of BOOK
