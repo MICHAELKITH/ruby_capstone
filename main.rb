@@ -1,5 +1,6 @@
 require_relative 'app'
-class MainMainu
+
+class MainMenu
   @app = App.new
   def user_options(choice)
     menu_options = {
@@ -85,3 +86,4 @@ def main
     main_menu.user_options(choice)
   end
 end
+main
