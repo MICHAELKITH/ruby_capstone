@@ -97,7 +97,6 @@ end
 
 main
 
-
 # require_relative 'app'
 # require './store_data'
 
@@ -144,7 +143,6 @@ main
 #   #   # Implement the logic to save books using the StoreData class
 #   # end
 # end
-
 
 # class ItemsApp
 #   def initialize
