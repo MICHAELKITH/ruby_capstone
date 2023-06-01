@@ -8,8 +8,6 @@ require 'date'
 require_relative 'genre'
 require_relative 'music_album'
 # Documentation for the App class
-require_relative 'book'
-require_relative 'label'
 
 class App
   attr_accessor :books, :authors, :games

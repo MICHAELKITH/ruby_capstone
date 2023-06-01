@@ -1,7 +1,6 @@
 require 'date'
 require_relative 'item'
 
-
 class Game < Item
   attr_accessor :last_played_at, :name
 
