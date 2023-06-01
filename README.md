@@ -63,8 +63,8 @@
 
 > Describe between 1-3 key features of the application.
 
-- **[key_feature_1]**
-- **[key_feature_2]**
+- **[Add_Game_and_list_game]**
+- **[Add_and_list_author]**
 - **[key_feature_3]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -175,6 +175,12 @@ Example:
 - Twitter: [@twitterhandle](https://twitter.com/DevMichael11)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/michaelkithinji/)
 
+👤 **Mudasir Issah**
+
+- GitHub: [@githubhandle](https://github.com/mudasiri)
+- Twitter: [@twitterhandle](https://twitter.com/mudasirissah)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/mudasiri/)
+
 ### 👤 **Ilyass Atlassi**:
 - GitHub: [ilyassatlass](https://github.com/ilyassatlass)
 - Twitter: [ilyass_atlassi](https://twitter.com/ilyass_atlassi)
@@ -188,7 +194,7 @@ Example:
 
 > Describe 1 - 3 features you will add to the project.
 
-- [ ] **[new_feature_1]**
+- [ ] **[GUI_Model]**
 - [ ] **[new_feature_2]**
 - [ ] **[new_feature_3]**
 
