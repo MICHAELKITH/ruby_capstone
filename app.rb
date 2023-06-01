@@ -9,19 +9,20 @@ require 'date'
 require_relative './src/genre'
 require_relative './src/music_album'
 require_relative './handler'
+class App
+  attr_accessor :books
 
-class App < Handler
   def initialize
-    super
-    @genres = []
-    @music_albums = []
+    @books = []
+    @labels = [Label.new('Love at the end of the day.', 'Blue'), Label.new('The love of my lives.', 'Grey')]
+    base = "#{Dir.pwd}/data"
+    books_reader = File.read("#{base}/books.json")
+    return if books_reader == ''
 
-    # @storage = Storage.new(self)
-    @store = PreserveData.new
-    @books = File.empty?('./store/books.json') ? [] : @store.load_data('./store/books.json')
-    @labels = File.empty?('./store/labels.json') ? [] : @store.load_data('./store/labels.json')
-    @games = File.empty?('./store/games.json') ? [] : @store.load_data('./store/games.json')
-    @authors = File.empty?('./store/authors.json') ? [] : @store.load_data('./store/authors.json')
+    JSON.parse(books_reader).each do |x|
+      @books.push(Book.new(x['publisher'], x['cover_state'], x['published_date']))
+    end
+
   end
 
   def list_books
