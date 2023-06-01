@@ -43,3 +43,15 @@ CREATE TABLE
         PRIMARY KEY (id)
     );
 
+-- create genre table
+CREATE TABLE Genre(
+  id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  name VARCHAR(60) NOT NULL
+);
+
+-- create music_album table
+CREATE TABLE MusicAlbum(
+  id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  on_spotify BOOLEAN NOT NULL,
+  FOREIGN KEY(id) REFERENCES item(id) ON UPDATE CASCADE
+);
