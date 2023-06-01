@@ -15,7 +15,7 @@ class MainMenu
       5 => :list_labels,
       6 => :list_authors,
       7 => :create_book,
-      8 => :add_music_album,
+      8 => :create_music,
       9 => :create_games,
       0 => :exit_app
     }
@@ -73,8 +73,8 @@ class MainMenu
     save_books(app.books)
   end
 
-  def add_music_album(app)
-    app.add_music_album
+  def create_music(app)
+    app.create_music
   end
 
   def create_games(app)
