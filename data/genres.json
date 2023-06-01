@@ -54,5 +54,13 @@
   {
     "genre_id": 741,
     "genre_name": "pop"
+  },
+  {
+    "genre_id": 424,
+    "genre_name": "ike"
+  },
+  {
+    "genre_id": 161,
+    "genre_name": "ike"
   }
 ]
