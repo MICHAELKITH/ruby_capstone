@@ -1,22 +1,28 @@
 require_relative 'app'
+require_relative 'store_data'
 
 class MainMenu
-  @app = App.new
+  def initialize
+    @app = App.new
+  end
+
   def user_options(choice)
     menu_options = {
-      1 => method(:list_books),
-      2 => method(:list_music),
-      3 => method(:list_games),
-      4 => method(:list_genres),
-      5 => method(:list_labels),
-      6 => method(:list_authors),
-      7 => method(:create_book),
-      8 => method(:create_music),
-      9 => method(:create_games),
-      0 => method(:exit_app)
+      1 => :list_books,
+      2 => :list_music,
+      3 => :list_games,
+      4 => :list_genres,
+      5 => :list_labels,
+      6 => :list_authors,
+      7 => :create_book,
+      8 => :create_music,
+      9 => :create_games,
+      0 => :exit_app
     }
     if menu_options.key?(choice)
-      menu_options[choice].call(app)
+      method_name = menu_options[choice]
+      send(method_name, @app)
+
     else
       puts 'Invalid option, please try again!'
     end
@@ -39,6 +45,7 @@ class MainMenu
 
   def list_books(app)
     app.list_books
+    # save_books(@app.books)
   end
 
   def list_music(app)
@@ -63,6 +70,7 @@ class MainMenu
 
   def create_book(app)
     app.create_book
+    save_books(app.books)
   end
 
   def create_music(app)
@@ -86,4 +94,70 @@ def main
     main_menu.user_options(choice)
   end
 end
+
 main
+
+# require_relative 'app'
+# require './store_data'
+
+# class MainMenu
+#   MENU_OPTIONS = [
+#     { number: '1', label: 'List all books', action: :list_books },
+#     { number: '2', label: 'List all music albums', action: :list_music },
+#     { number: '3', label: 'List all games', action: :list_games },
+#     { number: '4', label: 'List all genres', action: :list_genres },
+#     { number: '5', label: 'List all labels', action: :list_labels },
+#     { number: '6', label: 'List all authors', action: :list_authors },
+#     { number: '7', label: 'Create a book', action: :create_book },
+#     { number: '8', label: 'Create a music album', action: :create_music },
+#     { number: '9', label: 'Create a game', action: :create_games },
+#     { number: '0', label: 'Exit', action: :exit_app }
+#   ].freeze
+
+#   def initialize(app)
+#     @app = app
+#   end
+
+#   def user_options(choice)
+#     selected_option = MENU_OPTIONS.find { |option| option[:number] == choice }
+
+#     if selected_option.nil?
+#       puts 'Invalid option, please try again!'
+#     else
+#       @app.send(selected_option[:action])
+#       save_books(@app.books) if %w[7 8].include?(choice)
+#     end
+#   end
+
+#   def display
+#     puts 'Please choose an option'
+
+#     MENU_OPTIONS.each do |option|
+#       puts "#{option[:number]}. #{option[:label]}"
+#     end
+#   end
+
+#   # private
+
+#   # def save_books(books)
+#   #   # Implement the logic to save books using the StoreData class
+#   # end
+# end
+
+# class ItemsApp
+#   def initialize
+#     @app = App.new
+#     @MainMenu = MainMenu.new(@app)
+#   end
+
+#   def start
+#     puts 'Welcome to Items App!'
+#     loop do
+#       @MainMenu.display
+#       option = gets.chomp
+#       @MainMenu.user_options(option)
+#     end
+#   end
+# end
+
+# ItemsApp.new.start
