@@ -1,5 +1,6 @@
 require_relative 'app'
 require_relative 'store_data'
+require_relative 'handler'
 
 class MainMenu
   def initialize
@@ -73,7 +74,7 @@ class MainMenu
     save_books(app.books)
   end
 
-  def create_music(app)
+  def add_music_album(app)
     app.create_music
   end
 
@@ -84,6 +85,7 @@ class MainMenu
   def exit_app(app)
     app.exit_app
   end
+
 end
 
 def main
