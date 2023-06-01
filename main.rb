@@ -1,11 +1,9 @@
 require_relative 'app'
 require_relative 'store_data'
-require_relative 'handler'
 
 class MainMenu
   def initialize
     @app = App.new
-    @handle = Handler.new
   end
 
   def user_options(choice)
