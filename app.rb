@@ -16,7 +16,6 @@ class App
   include JsonStorage
   include Storage
 
-
   def initialize
     @books = []
     @authors = []
