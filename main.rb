@@ -5,6 +5,7 @@ require_relative 'handler'
 class MainMenu
   def initialize
     @app = App.new
+    @handle = Handler.new
   end
 
   def user_options(choice)
@@ -16,7 +17,7 @@ class MainMenu
       5 => :list_labels,
       6 => :list_authors,
       7 => :create_book,
-      8 => :create_music,
+      8 => :add_music_album,
       9 => :create_games,
       0 => :exit_app
     }
@@ -75,7 +76,7 @@ class MainMenu
   end
 
   def add_music_album(app)
-    app.create_music
+    app.add_music_album
   end
 
   def create_games(app)

@@ -1,9 +1,13 @@
-require_relative './store'
-require_relative 'storage'
+# require_relative './store'
+require 'json'
+# require_relative 'json_storage'
+# require_relative 'storage'
+require_relative 'genre'
+require_relative 'music_album'
 
 class Handler
-  include JsonStorage
-  include Storage
+  # include JsonStorage
+  # include Storage
 
   def add_music_album
     puts 'Album name: '
@@ -29,7 +33,7 @@ class Handler
   end
 
   def albums
-    music_data = get_data('./store/music_albums.json')
+    music_data = get_data('./data/music_albums.json')
     puts 'No music found' if music_data.empty?
     music_data.each do |music_album|
       puts "Album_name: #{music_album['music_name']} | On_spotify: #{music_album['music_on_spotify']}"
@@ -37,7 +41,7 @@ class Handler
   end
 
   def genres
-    data = get_data('./store/genres.json')
+    data = get_data('./data/genres.json')
     puts 'No genre found' if data.empty?
     data.each do |genre|
       puts "Genre name: #{genre['genre_name']}"
@@ -54,7 +58,7 @@ class Handler
 
       }
     end
-    update_data(array, './store/music_albums.json')
+    update_data(array, './data/music_albums.json')
   end
 
   def store_genre_data
