@@ -181,6 +181,11 @@ Example:
 - Twitter: [@twitterhandle](https://twitter.com/mudasirissah)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/mudasiri/)
 
+### 👤 **Ilyass Atlassi**:
+- GitHub: [ilyassatlass](https://github.com/ilyassatlass)
+- Twitter: [ilyass_atlassi](https://twitter.com/ilyass_atlassi)
+- LinkedIn: [Ilyass Atlassi](https://www.linkedin.com/in/ilyassatlassi/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
