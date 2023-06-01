@@ -22,7 +22,6 @@ class App
     JSON.parse(books_reader).each do |x|
       @books.push(Book.new(x['publisher'], x['cover_state'], x['published_date']))
     end
-
   end
 
   def list_books

@@ -16,7 +16,6 @@ describe Label do
       item = Item.new('Test Item')
       label.add_item(item)
       expect(item.label).to eq(label)
-
     end
   end
 end
