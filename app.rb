@@ -3,6 +3,8 @@ require_relative 'label'
 require_relative 'item'
 require_relative 'game'
 require_relative 'author'
+require_relative 'game_ui'
+require_relative 'author_ui'
 require 'json'
 require 'date'
 require_relative 'genre'
@@ -16,6 +18,8 @@ class App
     @books = []
     @authors = []
     @games = []
+    @gameui = GameUserInterface.new
+    @authorui = AuthorUserInterface.new
     @labels = [Label.new('Love at the end of the day.', 'Blue'), Label.new('The love of my lives.', 'Grey')]
     base = "#{Dir.pwd}/data"
     books_reader = File.read("#{base}/books.json")
@@ -78,56 +82,15 @@ class App
   # end
 
   def list_games
-    if @games.empty?
-      puts 'No games found in the system currently'
-    else
-      puts '=================================================================:'
-      puts 'List of Games:'
-      puts '=================================================================:'
-      puts 'ID - Game Name - Last Played Date - Published Date - Multiplayer'
-      @games.each do |game|
-        puts "#{game['id']} - #{game['game_name']} - #{game['last_played_at']} -
-        #{game['publish_date']} - #{game['multiplayer']}"
-      end
-      puts '=================================================================:'
-    end
+    @gameui.list_all_games
   end
 
   def list_authors
-    if @authors.empty?
-      puts 'No authors found in the system currently'
-    else
-      puts '=============================================:'
-      puts 'List of Authors:'
-      puts '=============================================:'
-      puts 'ID - First Name - Last Name'
-      authors.each do |author|
-        puts "#{author['id']} - #{author['first_name']} - #{author['last_name']}"
-      end
-      puts '=============================================:'
-    end
+    @authorui.list_authors
   end
 
   def create_games
-    puts 'write Name of the game'
-    game_name = gets.chomp
-    puts 'Write last played date (YYYY-MM-DD))'
-    last_played_at = gets.chomp
-    puts 'Enter published date (YYYY-MM-DD))'
-    publish_date = gets.chomp
-    puts 'Enter multiplayer'
-    multiplayer = gets.chomp
-    puts 'Enter first name'
-    first_name = gets.chomp
-    puts 'Enter last name'
-    last_name = gets.chomp
-    author = create_author(first_name, last_name)
-    authors << author
-    @store.save_data(authors, './data/authors.json')
-    game = create_game_object(game_name, last_played_at, publish_date, multiplayer)
-    @games << game
-    @store.save_data(@games, './data/games.json')
-    puts 'Game is created successfully'
+    @gameui.add_game
   end
 
   def create_author(first_name, last_name)
@@ -136,17 +99,6 @@ class App
       'id' => author.id,
       'first_name' => author.first_name,
       'last_name' => author.last_name
-    }
-  end
-
-  def create_game_object(game_name, last_played_at, publish_date, multiplayer)
-    game = Game.new(game_name, last_played_at, publish_date, multiplayer)
-    {
-      'id' => game.id,
-      'game_name' => game.game_name,
-      'last_played_at' => game.last_played_at,
-      'publish_date' => game.publish_date,
-      'multiplayer' => game.multiplayer
     }
   end
 
