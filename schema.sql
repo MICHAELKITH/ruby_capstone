@@ -42,3 +42,4 @@ CREATE TABLE
         last_played_at DATE NOT NULL,
         PRIMARY KEY (id)
     );
+
