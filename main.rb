@@ -84,7 +84,6 @@ class MainMenu
   def exit_app(app)
     app.exit_app
   end
-
 end
 
 def main

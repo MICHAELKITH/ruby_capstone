@@ -13,6 +13,7 @@ require_relative 'music_album'
 
 class App
   attr_accessor :books, :authors, :games
+
   include JsonStorage
   include Storage
 
@@ -40,7 +41,6 @@ class App
     end
     @books.each do |book|
       puts "publisher: #{book.publisher}, cover_state: #{book.cover_state}, published_date: #{book.published_date}"
-      
     end
   end
 
@@ -91,7 +91,7 @@ class App
     when 'n'
       @music_albums.push(MusicAlbum.new(name, publish_date, false))
     end
-    puts 'Music album created'
+    puts 'Music album created successfully!'
     store_music_data
   end
 
