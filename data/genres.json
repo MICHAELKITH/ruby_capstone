@@ -62,5 +62,9 @@
   {
     "genre_id": 161,
     "genre_name": "ike"
+  },
+  {
+    "genre_id": 16,
+    "genre_name": "Afro Pop"
   }
 ]

@@ -75,7 +75,7 @@
 
 > Add a link to your deployed project.
 
-- [Live Demo Link](https://yourdeployedapplicationlink.com)
+- [Live Demo Presentation Link](https://drive.google.com/file/d/1oWoRptnwSukLL6l6quea53fhPBgyBrEV/view?usp=sharing)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -129,13 +129,13 @@ Example command:
 
 To run the project, execute the following command:
 
-<!--
+
 Example command:
 
 ```sh
-  rails server
+  ruby main.rb
 ```
---->
+
 
 ### Run tests
 
