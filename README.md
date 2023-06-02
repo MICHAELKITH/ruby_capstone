@@ -205,7 +205,6 @@ If you like this project... Developing is art
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-> Give credit to everyone who inspired your codebase.
 
 I would like to thank...Microverse and the coding partners
 
