@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Parser
   module Color
     def self.color(str, code, bold: false)

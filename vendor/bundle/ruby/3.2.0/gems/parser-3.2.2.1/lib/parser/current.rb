@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Parser
   class << self
     def warn_syntax_deviation(feature, version)

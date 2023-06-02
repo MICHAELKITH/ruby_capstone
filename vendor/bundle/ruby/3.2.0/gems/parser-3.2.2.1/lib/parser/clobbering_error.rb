@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Parser
   ##
   # {Parser::ClobberingError} is raised when {Parser::Source::Rewriter}

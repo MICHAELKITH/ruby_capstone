@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module AST
   # Node is an immutable class, instances of which represent abstract
   # syntax tree nodes. It combines semantic information (i.e. anything

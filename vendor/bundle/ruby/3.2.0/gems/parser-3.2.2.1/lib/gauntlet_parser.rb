@@ -1,13 +1,11 @@
-# frozen_string_literal: true
-
 require 'gauntlet'
 require 'parser/all'
 require 'shellwords'
 
 class ParserGauntlet < Gauntlet
-  RUBY20 = 'ruby'
-  RUBY19 = 'ruby1.9.1'
-  RUBY18 = '/opt/rubies/ruby-1.8.7-p370/bin/ruby'
+  RUBY20 = 'ruby'.freeze
+  RUBY19 = 'ruby1.9.1'.freeze
+  RUBY18 = '/opt/rubies/ruby-1.8.7-p370/bin/ruby'.freeze
 
   def try(parser, ruby, file, show_ok: false)
     try_ruby = lambda do |e|

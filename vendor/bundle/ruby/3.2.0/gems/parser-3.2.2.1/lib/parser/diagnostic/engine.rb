@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Parser
   ##
   # {Parser::Diagnostic::Engine} provides a basic API for dealing with
