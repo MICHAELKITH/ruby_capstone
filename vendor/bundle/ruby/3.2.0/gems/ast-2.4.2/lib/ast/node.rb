@@ -69,8 +69,9 @@ module AST
     # your code does not expect the argument to be frozen, use `#dup`.
     #
     # The `properties` hash is passed to {#assign_properties}.
-    def initialize(type, children=[], properties={})
-      @type, @children = type.to_sym, children.to_a.freeze
+    def initialize(type, children = [], properties = {})
+      @type = type.to_sym
+      @children = children.to_a.freeze
 
       assign_properties(properties)
 
@@ -83,9 +84,9 @@ module AST
     # @param [Object] other
     # @return [Boolean]
     def eql?(other)
-      self.class.eql?(other.class)   &&
-      @type.eql?(other.type)         &&
-      @children.eql?(other.children)
+      self.class.eql?(other.class) &&
+        @type.eql?(other.type) &&
+        @children.eql?(other.children)
     end
 
     # By default, each entry in the `properties` hash is assigned to
@@ -104,7 +105,7 @@ module AST
     end
     protected :assign_properties
 
-    alias   :original_dup :dup
+    alias original_dup dup
     private :original_dup
 
     # Nodes are already frozen, so there is no harm in returning the
@@ -115,7 +116,7 @@ module AST
     def dup
       self
     end
-    alias :clone :dup
+    alias clone dup
 
     # Returns a new instance of Node where non-nil arguments replace the
     # corresponding fields of `self`.
@@ -130,14 +131,14 @@ module AST
     # @param  [Array, nil]  children
     # @param  [Hash, nil]   properties
     # @return [AST::Node]
-    def updated(type=nil, children=nil, properties=nil)
-      new_type       = type       || @type
-      new_children   = children   || @children
+    def updated(type = nil, children = nil, properties = nil)
+      new_type = type || @type
+      new_children = children || @children
       new_properties = properties || {}
 
       if @type == new_type &&
-          @children == new_children &&
-          properties.nil?
+         @children == new_children &&
+         properties.nil?
         self
       else
         copy = original_dup
@@ -155,8 +156,8 @@ module AST
         true
       elsif other.respond_to? :to_ast
         other = other.to_ast
-        other.type == self.type &&
-          other.children == self.children
+        other.type == type &&
+          other.children == children
       else
         false
       end
@@ -184,19 +185,19 @@ module AST
     #
     # @param  [Integer] indent Base indentation level.
     # @return [String]
-    def to_sexp(indent=0)
-      indented = "  " * indent
+    def to_sexp(indent = 0)
+      indented = '  ' * indent
       sexp = "#{indented}(#{fancy_type}"
 
       children.each do |child|
-        if child.is_a?(Node)
-          sexp += "\n#{child.to_sexp(indent + 1)}"
-        else
-          sexp += " #{child.inspect}"
-        end
+        sexp += if child.is_a?(Node)
+                  "\n#{child.to_sexp(indent + 1)}"
+                else
+                  " #{child.inspect}"
+                end
       end
 
-      sexp += ")"
+      sexp += ')'
 
       sexp
     end
@@ -208,19 +209,19 @@ module AST
     #
     # @param  [Integer] indent Base indentation level.
     # @return [String]
-    def inspect(indent=0)
-      indented = "  " * indent
+    def inspect(indent = 0)
+      indented = '  ' * indent
       sexp = "#{indented}s(:#{@type}"
 
       children.each do |child|
-        if child.is_a?(Node)
-          sexp += ",\n#{child.inspect(indent + 1)}"
-        else
-          sexp += ", #{child.inspect}"
-        end
+        sexp += if child.is_a?(Node)
+                  ",\n#{child.inspect(indent + 1)}"
+                else
+                  ", #{child.inspect}"
+                end
       end
 
-      sexp += ")"
+      sexp += ')'
 
       sexp
     end

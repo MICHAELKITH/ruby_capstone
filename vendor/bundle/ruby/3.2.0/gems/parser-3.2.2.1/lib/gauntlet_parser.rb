@@ -11,46 +11,41 @@ class ParserGauntlet < Gauntlet
 
   def try(parser, ruby, file, show_ok: false)
     try_ruby = lambda do |e|
-      Process.spawn(%{#{ruby} -c #{Shellwords.escape file}},
-                    :err => '/dev/null', :out => '/dev/null')
+      Process.spawn(%(#{ruby} -c #{Shellwords.escape file}),
+                    err: '/dev/null', out: '/dev/null')
       _, status = Process.wait2
 
       if status.success?
         # Bug in Parser.
-        puts "Parser bug."
-        @result[file] = { parser.to_s => "#{e.class}: #{e.to_s}" }
-      else
-        # No, this file is not Ruby.
-        yield if block_given?
+        puts 'Parser bug.'
+        @result[file] = { parser.to_s => "#{e.class}: #{e}" }
+      elsif block_given?
+        yield
       end
+      # No, this file is not Ruby.
     end
 
     begin
       parser.parse_file(file)
-
     rescue Parser::SyntaxError => e
       if e.diagnostic.location.resize(2).is?('<%')
-        puts "ERb."
+        puts 'ERb.'
         return
       end
 
       try_ruby.call(e)
-
     rescue ArgumentError, RegexpError,
            Encoding::UndefinedConversionError => e
-      puts "#{file}: #{e.class}: #{e.to_s}"
+      puts "#{file}: #{e.class}: #{e}"
 
       try_ruby.call(e)
-
     rescue Interrupt
       raise
-
     rescue Exception => e
-      puts "Parser bug: #{file} #{e.class}: #{e.to_s}"
-      @result[file] = { parser.to_s => "#{e.class}: #{e.to_s}" }
-
+      puts "Parser bug: #{file} #{e.class}: #{e}"
+      @result[file] = { parser.to_s => "#{e.class}: #{e}" }
     else
-      puts "Ok." if show_ok
+      puts 'Ok.' if show_ok
     end
   end
 
@@ -60,22 +55,22 @@ class ParserGauntlet < Gauntlet
     @result = {}
 
     if ENV.include?('FAST')
-      total_size = Dir["**/*.rb"].map(&File.method(:size)).reduce(:+)
+      total_size = Dir['**/*.rb'].map(&File.method(:size)).reduce(:+)
       if total_size > 300_000
-        puts "Skip."
+        puts 'Skip.'
         return
       end
     end
 
-    Dir["**/*.rb"].each do |file|
+    Dir['**/*.rb'].each do |file|
       next if File.directory? file
 
       try(Parser::Ruby20, RUBY20, file) do
-        puts "Trying 1.9:"
+        puts 'Trying 1.9:'
         try(Parser::Ruby19, RUBY19, file, show_ok: true) do
-          puts "Trying 1.8:"
+          puts 'Trying 1.8:'
           try(Parser::Ruby18, RUBY18, file, show_ok: true) do
-            puts "Invalid syntax."
+            puts 'Invalid syntax.'
           end
         end
       end
@@ -103,9 +98,9 @@ class ParserGauntlet < Gauntlet
   def shutdown
     super
 
-    errors  = data.count { |_name, errs| errs != {} }
-    total   = data.count
-    percent = "%.5f" % [100 - errors.to_f / total * 100]
+    errors = data.count { |_name, errs| errs != {} }
+    total = data.count
+    percent = format('%.5f', 100 - (errors.to_f / total * 100))
     puts "!!! was: #{@was_errors} now: #{errors} total: #{total} frac: #{percent}%"
   end
 end

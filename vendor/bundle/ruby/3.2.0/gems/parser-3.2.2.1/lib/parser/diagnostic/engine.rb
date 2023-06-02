@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Parser
-
   ##
   # {Parser::Diagnostic::Engine} provides a basic API for dealing with
   # diagnostics by delegating them to registered consumers.
@@ -34,19 +33,16 @@ module Parser
   #  @return [Boolean]
   #
   class Diagnostic::Engine
-    attr_accessor :consumer
-
-    attr_accessor :all_errors_are_fatal
-    attr_accessor :ignore_warnings
+    attr_accessor :consumer, :all_errors_are_fatal, :ignore_warnings
 
     ##
     # @param [#call(Diagnostic)] consumer
     #
-    def initialize(consumer=nil)
-      @consumer             = consumer
+    def initialize(consumer = nil)
+      @consumer = consumer
 
       @all_errors_are_fatal = false
-      @ignore_warnings      = false
+      @ignore_warnings = false
     end
 
     ##
@@ -68,9 +64,7 @@ module Parser
         @consumer.call(diagnostic)
       end
 
-      if raise?(diagnostic)
-        raise Parser::SyntaxError, diagnostic
-      end
+      raise Parser::SyntaxError, diagnostic if raise?(diagnostic)
 
       self
     end
@@ -85,7 +79,7 @@ module Parser
     #
     def ignore?(diagnostic)
       @ignore_warnings &&
-            diagnostic.level == :warning
+        diagnostic.level == :warning
     end
 
     ##
@@ -100,5 +94,4 @@ module Parser
         diagnostic.level == :fatal
     end
   end
-
 end

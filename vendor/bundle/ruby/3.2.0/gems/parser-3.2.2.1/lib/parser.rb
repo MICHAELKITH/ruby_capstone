@@ -2,9 +2,9 @@
 
 if RUBY_VERSION =~ /^1\.[89]\./
   require 'parser/version'
-  raise LoadError, <<-UNSUPPORTED_VERSION_MSG
-parser v#{Parser::VERSION} cannot run on Ruby #{RUBY_VERSION}.
-Please upgrade to Ruby 2.0.0 or higher, or use an older version of the parser gem.
+  raise LoadError, <<~UNSUPPORTED_VERSION_MSG
+    parser v#{Parser::VERSION} cannot run on Ruby #{RUBY_VERSION}.
+    Please upgrade to Ruby 2.0.0 or higher, or use an older version of the parser gem.
   UNSUPPORTED_VERSION_MSG
 end
 

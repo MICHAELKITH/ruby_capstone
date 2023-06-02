@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Parser
-
   ##
   # Base class for version-specific parsers.
   #
@@ -27,7 +26,7 @@ module Parser
     # @param [Numeric] line The initial line number.
     # @return [Parser::AST::Node]
     #
-    def self.parse(string, file='(string)', line=1)
+    def self.parse(string, file = '(string)', line = 1)
       parser = default_parser
       source_buffer = setup_source_buffer(file, line, string, parser.default_encoding)
       parser.parse(source_buffer)
@@ -46,7 +45,7 @@ module Parser
     # @param [Numeric] line The initial line number.
     # @return [Array]
     #
-    def self.parse_with_comments(string, file='(string)', line=1)
+    def self.parse_with_comments(string, file = '(string)', line = 1)
       parser = default_parser
       source_buffer = setup_source_buffer(file, line, string, parser.default_encoding)
       parser.parse_with_comments(source_buffer)
@@ -85,10 +84,10 @@ module Parser
       parser = new
 
       parser.diagnostics.all_errors_are_fatal = true
-      parser.diagnostics.ignore_warnings      = true
+      parser.diagnostics.ignore_warnings = true
 
       parser.diagnostics.consumer = lambda do |diagnostic|
-        $stderr.puts(diagnostic.render)
+        warn(diagnostic.render)
       end
 
       parser
@@ -102,7 +101,7 @@ module Parser
       if name == 'Parser::Ruby18'
         source_buffer.raw_source = string
       else
-        source_buffer.source     = string
+        source_buffer.source = string
       end
 
       source_buffer
@@ -110,23 +109,16 @@ module Parser
     private_class_method :setup_source_buffer
 
     attr_reader :lexer
-    attr_reader :diagnostics
-    attr_reader :builder
-    attr_reader :static_env
-    attr_reader :source_buffer
-    attr_reader :context
-    attr_reader :max_numparam_stack
-    attr_reader :current_arg_stack
-    attr_reader :pattern_variables
-    attr_reader :pattern_hash_keys
+    attr_reader :diagnostics, :builder, :static_env, :source_buffer, :context, :max_numparam_stack, :current_arg_stack,
+                :pattern_variables, :pattern_hash_keys
 
     ##
     # @param [Parser::Builders::Default] builder The AST builder to use.
     #
-    def initialize(builder=Parser::Builders::Default.new)
+    def initialize(builder = Parser::Builders::Default.new)
       @diagnostics = Diagnostic::Engine.new
 
-      @static_env  = StaticEnvironment.new
+      @static_env = StaticEnvironment.new
 
       # Stack that holds current parsing context
       @context = Context.new
@@ -145,8 +137,8 @@ module Parser
 
       @lexer = Lexer.new(version)
       @lexer.diagnostics = @diagnostics
-      @lexer.static_env  = @static_env
-      @lexer.context     = @context
+      @lexer.static_env = @static_env
+      @lexer.context = @context
 
       @builder = builder
       @builder.parser = self
@@ -154,9 +146,7 @@ module Parser
       # Last emitted token
       @last_token = nil
 
-      if self.class::Racc_debug_parser && ENV['RACC_DEBUG']
-        @yydebug = true
-      end
+      @yydebug = true if self.class::Racc_debug_parser && ENV['RACC_DEBUG']
 
       reset
     end
@@ -185,12 +175,12 @@ module Parser
     #
     def parse(source_buffer)
       @lexer.source_buffer = source_buffer
-      @source_buffer       = source_buffer
+      @source_buffer = source_buffer
 
       do_parse || nil # Force `false` to `nil`, see https://github.com/ruby/racc/pull/136
     ensure
       # Don't keep references to the source file.
-      @source_buffer       = nil
+      @source_buffer = nil
       @lexer.source_buffer = nil
     end
 
@@ -204,7 +194,7 @@ module Parser
     def parse_with_comments(source_buffer)
       @lexer.comments = []
 
-      [ parse(source_buffer), @lexer.comments ]
+      [parse(source_buffer), @lexer.comments]
     ensure
       @lexer.comments = nil
     end
@@ -230,17 +220,17 @@ module Parser
     # @param [Boolean] recover If true, recover from syntax errors. False by default.
     # @return [Array]
     #
-    def tokenize(source_buffer, recover=false)
+    def tokenize(source_buffer, recover = false)
       @lexer.tokens = []
       @lexer.comments = []
 
       begin
         ast = parse(source_buffer)
       rescue Parser::SyntaxError
-        raise if !recover
+        raise unless recover
       end
 
-      [ ast, @lexer.comments, @lexer.tokens ]
+      [ast, @lexer.comments, @lexer.tokens]
     ensure
       @lexer.tokens = nil
       @lexer.comments = nil
@@ -263,7 +253,7 @@ module Parser
       end
     end
 
-    def diagnostic(level, reason, arguments, location_t, highlights_ts=[])
+    def diagnostic(level, reason, arguments, location_t, highlights_ts = [])
       _, location = location_t
 
       highlights = highlights_ts.map do |token|
@@ -272,20 +262,21 @@ module Parser
       end
 
       @diagnostics.process(
-          Diagnostic.new(level, reason, arguments, location, highlights))
+        Diagnostic.new(level, reason, arguments, location, highlights)
+      )
 
-      if level == :error
-        yyerror
-      end
+      return unless level == :error
+
+      yyerror
     end
 
-    def on_error(error_token_id, error_value, value_stack)
+    def on_error(error_token_id, error_value, _value_stack)
       token_name = token_to_str(error_token_id)
       _, location = error_value
 
       @diagnostics.process(Diagnostic.new(
-          :error, :unexpected_token, { :token => token_name }, location))
+                             :error, :unexpected_token, { token: token_name }, location
+                           ))
     end
   end
-
 end

@@ -3,7 +3,8 @@
 module Parser
   module Color
     def self.color(str, code, bold: false)
-      return str unless STDOUT.tty?
+      return str unless $stdout.tty?
+
       code = Array(code)
       code.unshift(1) if bold
       "\e[#{code.join(';')}m#{str}\e[0m"

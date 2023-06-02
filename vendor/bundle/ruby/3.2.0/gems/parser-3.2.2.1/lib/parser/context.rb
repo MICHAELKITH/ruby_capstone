@@ -24,7 +24,7 @@ module Parser
       in_class
       in_block
       in_lambda
-    ]
+    ].freeze
 
     def initialize
       reset

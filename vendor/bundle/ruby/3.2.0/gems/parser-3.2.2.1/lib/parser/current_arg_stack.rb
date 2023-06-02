@@ -20,7 +20,7 @@ module Parser
     end
 
     def empty?
-      @stack.size == 0
+      @stack.empty?
     end
 
     def push(value)

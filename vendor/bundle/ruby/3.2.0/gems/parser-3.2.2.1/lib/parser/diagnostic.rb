@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Parser
-
   ##
   # @api public
   #
@@ -34,10 +33,9 @@ module Parser
     #
     # @return [Array]
     #
-    LEVELS = [:note, :warning, :error, :fatal].freeze
+    LEVELS = %i[note warning error fatal].freeze
 
-    attr_reader :level, :reason, :arguments
-    attr_reader :location, :highlights
+    attr_reader :level, :reason, :arguments, :location, :highlights
 
     ##
     # @param [Symbol] level
@@ -46,7 +44,7 @@ module Parser
     # @param [Parser::Source::Range] location
     # @param [Array<Parser::Source::Range>] highlights
     #
-    def initialize(level, reason, arguments, location, highlights=[])
+    def initialize(level, reason, arguments, location, highlights = [])
       unless LEVELS.include?(level)
         raise ArgumentError,
               "Diagnostic#level must be one of #{LEVELS.join(', ')}; " \
@@ -54,11 +52,11 @@ module Parser
       end
       raise 'Expected a location' unless location
 
-      @level       = level
-      @reason      = reason
-      @arguments   = (arguments || {}).dup.freeze
-      @location    = location
-      @highlights  = highlights.dup.freeze
+      @level = level
+      @reason = reason
+      @arguments = (arguments || {}).dup.freeze
+      @location = location
+      @highlights = highlights.dup.freeze
 
       freeze
     end
@@ -89,9 +87,9 @@ module Parser
       else
         # multi-line diagnostic
         first_line = first_line_only(@location)
-        last_line  = last_line_only(@location)
-        num_lines  = (@location.last_line - @location.line) + 1
-        buffer     = @location.source_buffer
+        last_line = last_line_only(@location)
+        num_lines = (@location.last_line - @location.line) + 1
+        buffer = @location.source_buffer
 
         last_lineno, last_column = buffer.decompose_position(@location.end_pos)
         ["#{@location}-#{last_lineno}:#{last_column}: #{@level}: #{message}"] +
@@ -107,31 +105,31 @@ module Parser
     #
     # @return [Array<String>]
     #
-    def render_line(range, ellipsis=false, range_end=false)
-      source_line    = range.source_line
+    def render_line(range, ellipsis = false, range_end = false)
+      source_line = range.source_line
       highlight_line = ' ' * source_line.length
 
       @highlights.each do |highlight|
-       line_range = range.source_buffer.line_range(range.line)
-        if highlight = highlight.intersect(line_range)
+        line_range = range.source_buffer.line_range(range.line)
+        if (highlight = highlight.intersect(line_range))
           highlight_line[highlight.column_range] = '~' * highlight.size
         end
       end
 
       if range.is?("\n")
-        highlight_line += "^"
+        highlight_line += '^'
       else
-        if !range_end && range.size >= 1
-          highlight_line[range.column_range] = '^' + '~' * (range.size - 1)
-        else
-          highlight_line[range.column_range] = '~' * range.size
-        end
+        highlight_line[range.column_range] = if !range_end && range.size >= 1
+                                               "^#{'~' * (range.size - 1)}"
+                                             else
+                                               '~' * range.size
+                                             end
       end
 
       highlight_line += '...' if ellipsis
 
-      [source_line, highlight_line].
-        map { |line| "#{range.source_buffer.name}:#{range.line}: #{line}" }
+      [source_line, highlight_line]
+        .map { |line| "#{range.source_buffer.name}:#{range.line}: #{line}" }
     end
 
     ##
@@ -140,10 +138,10 @@ module Parser
     # @return [Parser::Source::Range]
     #
     def first_line_only(range)
-      if range.line != range.last_line
-        range.resize(range.source =~ /\n/)
-      else
+      if range.line == range.last_line
         range
+      else
+        range.resize(range.source =~ /\n/)
       end
     end
 
@@ -153,10 +151,10 @@ module Parser
     # @return [Parser::Source::Range]
     #
     def last_line_only(range)
-      if range.line != range.last_line
-        range.adjust(begin_pos: range.source =~ /[^\n]*\z/)
-      else
+      if range.line == range.last_line
         range
+      else
+        range.adjust(begin_pos: range.source =~ /[^\n]*\z/)
       end
     end
   end
