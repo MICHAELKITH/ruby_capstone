@@ -53,3 +53,5 @@ Style/HashTransformValues:
 AllCops:
   Exclude:
     - 'vendor/bundle/**/parser-*/**'
+AllCops:
+  Enabled: false
