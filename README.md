@@ -8,7 +8,6 @@
 
 </div>
 
-<!-- TABLE OF CONTENTS -->
 
 # 📗 Table of Contents
 
@@ -26,6 +25,7 @@
     - [Run tests](#run-tests)
     - [Deployment](#deployment)
   - [👥 Authors ](#-authors-)
+    - [👤 **Ilyass Atlassi**:](#-ilyass-atlassi)
   - [🔭 Future Features ](#-future-features-)
   - [🤝 Contributing ](#-contributing-)
   - [⭐️ Show your support ](#️-show-your-support-)
@@ -61,7 +61,6 @@
 
 ### Key Features <a name="key-features"></a>
 
-> Describe between 1-3 key features of the application.
 
 - **[Add_Game_and_list_game]**
 - **[Add_and_list_author]**
@@ -73,7 +72,6 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-> Add a link to your deployed project.
 
 - [Live Demo Presentation Link](https://drive.google.com/file/d/1oWoRptnwSukLL6l6quea53fhPBgyBrEV/view?usp=sharing)
 
@@ -167,7 +165,6 @@ Example:
 
 ## 👥 Authors <a name="authors"></a>
 
-> Mention all of the collaborators of this project.
 
 👤 **Michael Kithinji**
 
@@ -192,7 +189,6 @@ Example:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-> Describe 1 - 3 features you will add to the project.
 
 - [ ] **[GUI_Model]**
 - [ ] **[Store_data]**
@@ -214,9 +210,8 @@ Feel free to check the [issues page](../../issues/).
 
 ## ⭐️ Show your support <a name="support"></a>
 
-> Write a message to encourage readers to support your project
 
-If you like this project...
+If you like this project... Developing is art
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -226,7 +221,7 @@ If you like this project...
 
 > Give credit to everyone who inspired your codebase.
 
-I would like to thank...
+I would like to thank...Microverse and the coding partners
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -234,7 +229,6 @@ I would like to thank...
 
 ## ❓ FAQ (OPTIONAL) <a name="faq"></a>
 
-> Add at least 2 questions new developers would ask when they decide to use your project.
 
 - **[Question_1]**
 
