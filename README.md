@@ -65,7 +65,7 @@
 
 - **[Add_Game_and_list_game]**
 - **[Add_and_list_author]**
-- **[key_feature_3]**
+- **[Add_and_list_book]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -195,8 +195,8 @@ Example:
 > Describe 1 - 3 features you will add to the project.
 
 - [ ] **[GUI_Model]**
-- [ ] **[new_feature_2]**
-- [ ] **[new_feature_3]**
+- [ ] **[Store_data]**
+- [ ] **[Use_OOP]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
