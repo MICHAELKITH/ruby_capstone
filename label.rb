@@ -16,10 +16,3 @@ class Label
     item.label = self
   end
 end
-
-# ma = Label.new('ilyass', 'atlssi')
-# pa = Item.new('ilyass')
-
-# ma.add_item(pa)
-
-# puts ma.add_item(pa)
