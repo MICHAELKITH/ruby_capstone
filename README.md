@@ -23,7 +23,6 @@
     - [Install](#install)
     - [Usage](#usage)
     - [Run tests](#run-tests)
-    - [Deployment](#deployment)
   - [👥 Authors ](#-authors-)
     - [👤 **Ilyass Atlassi**:](#-ilyass-atlassi)
   - [🔭 Future Features ](#-future-features-)
@@ -79,59 +78,62 @@
 
 <!-- GETTING STARTED -->
 
+<!-- GETTING STARTED -->
+
 ## 💻 Getting Started <a name="getting-started"></a>
 
-> Describe how a new developer could make use of your project.
 
 To get a local copy up and running, follow these steps.
 
 ### Prerequisites
 
-In order to run this project you need:
+In order to run this project you need:💯
 
-<!--
+
 Example command:
 
 ```sh
- gem install rails
+1. Use a browser
+2. Use cable internet
+3. Your preferred IDE
 ```
- -->
+
 
 ### Setup
 
 Clone this repository to your desired folder:
 
-<!--
+
 Example commands:
 
 ```sh
-  cd my-folder
-  git clone git@github.com:myaccount/my-project.git
+  git clone  git@github.com:MICHAELKITH/ruby_capstone.git
+  cd ruby_capstone
 ```
---->
+
 
 ### Install
 
 Install this project with:
 
-<!--
+
 Example command:
 
 ```sh
-  cd my-project
-  gem install
+  - If you want to install the rubocop for the linter:
+  - Add the Gem gem 'rubocop', '>= 1.0', '< 2.0' to your gem file
 ```
---->
+
 
 ### Usage
 
 To run the project, execute the following command:
 
+```usage
+1. Open vscode 👌
+2. Open the terminal using ubuntu
+3. Run the project via ruby main.rb💯
 
-Example command:
-
-```sh
-  ruby main.rb
 ```
 
 
@@ -139,25 +141,11 @@ Example command:
 
 To run tests, run the following command:
 
-<!--
-Example command:
-
-```sh
-  bin/rails test test/models/article_test.rb
+```test
+  rspec ./spec/filename_spec.rb
 ```
---->
 
-### Deployment
 
-You can deploy this project using:
-
-<!--
-Example:
-
-```sh
-
-```
- -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
