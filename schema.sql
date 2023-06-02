@@ -9,6 +9,9 @@ CREATE TABLE item (
   archived BOOLEAN 
 );
 
+CREATE INDEX idx_item_genre ON item (genre);
+CREATE INDEX idx_item_author ON item (author);
+CREATE INDEX idx_item_label ON item (label);
 
 CREATE TABLE labels (
     id  INT GENERATED ALWAYS AS IDENTITY,
@@ -55,3 +58,5 @@ CREATE TABLE MusicAlbum(
   on_spotify BOOLEAN NOT NULL,
   FOREIGN KEY(id) REFERENCES item(id) ON UPDATE CASCADE
 );
+
+CREATE INDEX idx_item_id_musicalbum ON MusicAlbum (id);
